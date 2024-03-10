@@ -39,7 +39,7 @@ const GeneratePage = async ({ params }: {
         .eq("uuid", details.groupId);
 
     if (groupError || !groups) {
-        console.log(error);
+        console.log(groupError);
         toast.error("Error occurred fetching group");
     }
 
@@ -61,7 +61,7 @@ const GeneratePage = async ({ params }: {
         .eq("uuid", details.eventId);
 
         if (eventError || !event) {
-            console.log(error);
+            console.log(groupError);
             toast.error("Error occurred fetching event");
         }
 
