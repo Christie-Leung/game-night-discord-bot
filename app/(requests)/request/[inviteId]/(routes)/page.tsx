@@ -32,6 +32,11 @@ const GeneratePage = async ({ params }: {
             eventId: item.eventId,
         }))[0]
     }
+    if (!details) {
+        console.log(rqError);
+        window.location.replace('/');
+        return;
+    }
 
     const { data: groups, error: groupError } = await supabase
         .from("Group")
@@ -65,6 +70,17 @@ const GeneratePage = async ({ params }: {
             toast.error("Error occurred fetching event");
         }
 
+        if (!groupDetails) {
+            
+            window.location.replace('/');
+            return;
+        }
+
+    if (!eventDetails) {
+        window.location.replace('/');
+        return;
+    }
+
         if (event) {
             eventDetails = event.map((item) => ({
                 name: item.name,
@@ -75,10 +91,6 @@ const GeneratePage = async ({ params }: {
         }
 
     }
-
-
-
-
 
     return (
         <div className="w-full h-full flex items-center mt-20 flex-col">
