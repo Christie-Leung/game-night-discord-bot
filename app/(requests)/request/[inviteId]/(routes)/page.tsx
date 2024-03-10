@@ -77,11 +77,6 @@ const GeneratePage = async ({ params }: {
             return;
         }
 
-    if (!eventDetails) {
-        redirect('/');
-        return;
-    }
-
         if (event) {
             eventDetails = event.map((item) => ({
                 name: item.name,
@@ -91,6 +86,10 @@ const GeneratePage = async ({ params }: {
             }))[0]
         }
 
+    }
+    if (!eventDetails) {
+        redirect('/');
+        return;
     }
 
     return (
