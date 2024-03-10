@@ -13,6 +13,7 @@ const RequestsPage = async ({ params }: {
   .select("*")
   .eq("groupId", params.groupId);
 
+    console.log(params.groupId);
 
   let formattedGroups: RequestGroupColumn[] = []
   
@@ -25,6 +26,7 @@ const RequestsPage = async ({ params }: {
       createdAt: format(item.created_at, "MMMM do, yyyy"),
     }));
 }
+    console.log(formattedGroups);
 
   return (
     <div className="flex-col">
