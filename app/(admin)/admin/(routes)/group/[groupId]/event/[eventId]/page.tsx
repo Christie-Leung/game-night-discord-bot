@@ -21,11 +21,17 @@ const EventDetailPage = async ({ params }: {
         .select("*")
         .eq("eventId", params.eventId);
     
-    if (error || !data || data.length < 1) {
+    if (error) {
         toast.error(`Error retriving event ${params.eventId}`);
         window.location.replace(`/admin/group/${params.groupId}/event`);
+        return;
     }
 
+    if (!data) {
+        window.location.replace('/');
+        return;
+    }
+    
     const event = data[0];
 
     if (requestGroupError || !requestGroups) {
