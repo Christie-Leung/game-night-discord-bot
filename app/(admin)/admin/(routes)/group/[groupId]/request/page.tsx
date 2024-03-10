@@ -18,7 +18,7 @@ const RequestsPage = async ({ params }: {
   
   if (group) {
     formattedGroups = group.map((item) => ({
-      id: item.uuid,
+      id: item.id,
       groupId: item.groupId,
       name: item.name,
       type: item.type,
