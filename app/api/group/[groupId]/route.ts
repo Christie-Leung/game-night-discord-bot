@@ -4,7 +4,7 @@ import { NextResponse } from "next/server";
 import { createClient } from "@/utils/supabase/client";
 
 export async function DELETE(
-  _req: Request,
+  req: Request,
   { params } : { params: { groupId: string }}
 ) {
   try {
@@ -31,5 +31,3 @@ export async function DELETE(
     return new NextResponse("Internal error", { status: 500 })
   }
 }
-
-export default DELETE;
