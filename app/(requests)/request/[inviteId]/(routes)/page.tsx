@@ -23,7 +23,7 @@ const GeneratePage = async ({ params }: {
         .from("RequestGroup")
         .select("*")
         .eq("id", params.inviteId);
-    
+    console.log(rqDetails);
     let details = null;
     if (rqDetails) {
         details = rqDetails.map((item) => ({
@@ -33,6 +33,7 @@ const GeneratePage = async ({ params }: {
             eventId: item.eventId,
         }))[0]
     }
+    
     if (!details) {
         console.log(rqError);
         redirect('/');
@@ -71,8 +72,9 @@ const GeneratePage = async ({ params }: {
             toast.error("Error occurred fetching event");
         }
 
+        
         if (!groupDetails) {
-            
+            console.log(groupDetails);
             redirect('/');
             return;
         }

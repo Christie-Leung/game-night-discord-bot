@@ -3,10 +3,10 @@ import { createClient } from "@/utils/supabase/client";
 import { auth } from "@clerk/nextjs";
 import { EventClient } from "./components/client";
 import { EventColumn } from "./components/column";
-import toast from "react-hot-toast";
 import { Separator } from "@/components/ui/separator";
 import { RequestClient } from "./request/components/client";
 import { RequestGroupColumn } from "./request/components/column";
+import toast from "react-hot-toast";
 
 const EventsPage = async ({ params }: {
     params: { groupId: string }
@@ -44,7 +44,7 @@ const EventsPage = async ({ params }: {
   
   if (group) {
     formattedGroups = group.map((item) => ({
-      id: item.uuid,
+      id: item.id,
       groupId: item.groupId,
       name: item.name,
       type: item.type,
