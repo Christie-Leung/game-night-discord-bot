@@ -37,30 +37,4 @@ export async function POST(
     return new NextResponse("Internal error", { status: 500 })
   }
 }
-
-export async function GET(
-  req: Request,
-) {
-  try {
-    const supabase = createClient();
-    const { userId } = auth();
-
-    if (!userId) {
-      return new NextResponse("Unauthorized", { status: 401 })
-    }
-  
-    const {data: group, error} = await supabase.from('Group')
-    .select('*')
-    .eq('adminId', userId);
-
-    if (error) {
-      console.log('[GROUP_GET]', error);
-      return new NextResponse("Internal error", { status: 500 })
-    }
-
-    return NextResponse.json(group);
-  } catch (error) {
-    console.log('[GROUP_GET]', error);
-    return new NextResponse("Internal error", { status: 500 })
-  }
-}
+export default POST;
