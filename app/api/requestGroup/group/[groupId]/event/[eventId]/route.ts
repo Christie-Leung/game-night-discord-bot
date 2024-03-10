@@ -1,7 +1,6 @@
 import { NextResponse } from "next/server";
 
 import { createClient } from "@/utils/supabase/client";
-import { useParams } from "next/navigation";
 
 export async function POST(
   req: Request,
