@@ -5,7 +5,7 @@ import { createClient } from "@/utils/supabase/client";
 
 export async function DELETE(
   req: Request,
-  { params } : { params: { groupId: string }}
+  { params } : { params : { groupId: string }}
 ) {
   try {
     const supabase = createClient();
@@ -15,10 +15,10 @@ export async function DELETE(
       return new NextResponse("Unauthorized", { status: 401 })
     }
 
-
+    console.log(params);
     const {data: event, error} = await supabase.from('Group')
     .delete()
-    .eq("id", params.groupId);
+    .eq("uuid", params.groupId);
 
     if (error) {
       console.log('[GROUP_DELETE]', error);

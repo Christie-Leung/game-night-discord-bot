@@ -48,8 +48,7 @@ const formSchema = z.object({
         const url = values.eventId ? `/api/requestGroup/group/${params.groupId}/event/${values.eventId}`
         : `/api/requestGroup/group/${params.groupId}`;
         const response = await axios.post(url, values);
-  
-        window.location.assign(`/request/${response}`);
+        window.location.assign(`/request/${response.data}`);
         toast.success("Request Group created.")
       } catch (error) {
         toast.error("Something went wrong.")

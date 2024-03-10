@@ -4,7 +4,7 @@ import { NextResponse } from "next/server";
 import { createClient } from "@/utils/supabase/client";
 
 export async function DELETE(
-  _req: Request,
+  req: Request,
   { params } : { params: { requestGroupId: string }}
 ) {
   try {

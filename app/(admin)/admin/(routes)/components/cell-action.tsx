@@ -34,7 +34,7 @@ export const CellAction: React.FC<CellActionProps> = ({
   const onDelete = async () => {
     try {
       setLoading(true);
-      await axios.delete(`/api/group/${params.groupId}`);
+      await axios.delete(`/api/group/${data.uuid}`);
       router.refresh();
       toast.success("Group successfully deleted.");
     } catch (error) {
@@ -71,7 +71,7 @@ export const CellAction: React.FC<CellActionProps> = ({
             <Copy className="mr-2 h-4 w-4"/>
             Invite Members
           </DropdownMenuItem>
-          <DropdownMenuItem onClick={onDelete}>
+          <DropdownMenuItem onClick={() => setOpen(true)}>
             <Trash className="mr-2 h-4 w-4"/>
             Delete
           </DropdownMenuItem>

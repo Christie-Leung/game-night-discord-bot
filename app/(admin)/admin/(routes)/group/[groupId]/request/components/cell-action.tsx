@@ -25,10 +25,16 @@ export const CellAction: React.FC<CellActionProps> = ({
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
 
+  const onCopy = (id: string) => {
+    navigator.clipboard.writeText(`https://x-night-ideas.vercel.app/public/request/${id}`);
+    toast.success("Request ID copied to the clipbaord. Send it to your group!");
+  };
 
   const onDelete = async () => {
     try {
       setLoading(true);
+
+      console.log(data.id);
       await axios.delete(`/api/requestGroup/${data.id}`);
       router.refresh();
       toast.success("Request Group successfully deleted.");
@@ -62,7 +68,11 @@ export const CellAction: React.FC<CellActionProps> = ({
           <DropdownMenuLabel>
             Actions
           </DropdownMenuLabel>
-          <DropdownMenuItem onClick={onDelete}>
+          <DropdownMenuItem onClick={() => onCopy(data.id)}>
+            <Copy className="mr-2 h-4 w-4"/>
+            Copy Request Link
+          </DropdownMenuItem>
+          <DropdownMenuItem onClick={() => setOpen(true)}>
             <Trash className="mr-2 h-4 w-4"/>
             Delete
           </DropdownMenuItem>

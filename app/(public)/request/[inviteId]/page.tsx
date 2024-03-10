@@ -1,5 +1,5 @@
 import { Heading } from "@/components/ui/heading"
-import { GameForm } from "./components/game-form";
+import { IdeaForm } from "./components/idea-form";
 import { createClient } from "@/utils/supabase/client";
 import toast from "react-hot-toast";
 import { RocketIcon } from "@radix-ui/react-icons"
@@ -10,10 +10,9 @@ import {
   AlertTitle,
 } from "@/components/ui/alert"
 import { format } from "date-fns";
-import { Separator } from "@/components/ui/separator";
 import { redirect } from 'next/navigation';
 
-const GeneratePage = async ({ params }: {
+const IdeasPage = async ({ params }: {
     params: { inviteId: string }
 }) => {
 
@@ -33,11 +32,12 @@ const GeneratePage = async ({ params }: {
             eventId: item.eventId,
         }))[0]
     }
+    console.log(details);
     
     if (!details) {
         console.log(rqError);
+        toast.error("Please ask the host to make sure you have the correct link!");
         redirect('/');
-        return;
     }
 
     const { data: groups, error: groupError } = await supabase
@@ -72,15 +72,16 @@ const GeneratePage = async ({ params }: {
             toast.error("Error occurred fetching event");
         }
 
-        
+        console.log(groupDetails);
         if (!groupDetails) {
             console.log(groupDetails);
+            toast.error("Please ask the host to make sure you have the correct link!");
             redirect('/');
-            return;
         }
 
         if (event) {
             eventDetails = event.map((item) => ({
+                id: item.uuid,
                 name: item.name,
                 description: item.description,
                 eventDate: item.event_date,
@@ -92,17 +93,18 @@ const GeneratePage = async ({ params }: {
 
     return (
         <div className="w-full h-full flex items-center mt-20 flex-col">
+            <div className="w-auto space-y-4 flex flex-col items-center">
             <Heading 
                 title={"Put in your requests!"}
                 description={eventDetails ? `Your input is needed for ${eventDetails.name}` : groupDetails ? `Your input is needed for ${groupDetails.name} to continue hosting great events!` : "" }
             />
             {eventDetails && 
-                <div className="mt-10 mb-5 space-y-4">
+                <div className="mt-5 space-y-4">
                     <Alert>
                         <RocketIcon className="h-4 w-4" />
                         <AlertTitle>Event Reminder!</AlertTitle>
                         <AlertDescription>
-                            {eventDetails.name} is happning on {format(eventDetails.eventDate, "MMMM do, yyyy")} at {eventDetails.location}.
+                            {eventDetails.name} is happening on {format(eventDetails.eventDate, "MMMM do, yyyy")} at {eventDetails.location}.
 
                             <br />
                             <br />
@@ -111,11 +113,11 @@ const GeneratePage = async ({ params }: {
                     </Alert>
                 </div>
             }
-
-            <GameForm inviteId={params.inviteId} />
+            <IdeaForm inviteId={params.inviteId} id={eventDetails ? eventDetails.id : null}/>
+            </div>
         </div>
     )
 }
 
-export default GeneratePage;
+export default IdeasPage;
 

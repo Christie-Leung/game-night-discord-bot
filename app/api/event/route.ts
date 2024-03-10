@@ -33,8 +33,7 @@ export async function POST(
       console.log('[EVENT_POST]', error);
       return new NextResponse("Internal error", { status: 500 })
     }
-    
-    return NextResponse.json(event[0]?.uuid);
+    return NextResponse.json(event[0].uuid);
   } catch (error) {
     console.log('[EVENT_POST]', error);
     return new NextResponse("Internal error", { status: 500 })

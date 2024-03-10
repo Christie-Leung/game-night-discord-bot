@@ -16,13 +16,18 @@ export async function POST(
       return new NextResponse("Name is required", { status: 400 })
     }
 
-    const res = await supabase.from('RequestGroup').insert({
+    const { data, error } = await supabase.from('RequestGroup').insert({
         name: name,
         type: type,
         groupId: params.groupId,
-    }).select("id")
+    }).select("id");
 
-    return NextResponse.json(res);
+    if (error) {
+      console.log('[REQUESTGROUP_POST]', error);
+    return new NextResponse("Internal error", { status: 500 });
+    }
+
+    return NextResponse.json(data[0].id);
   } catch (error) {
     console.log('[REQUESTGROUP_POST]', error);
     return new NextResponse("Internal error", { status: 500 })

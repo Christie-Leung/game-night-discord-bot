@@ -30,7 +30,7 @@ export const CellAction: React.FC<CellActionProps> = ({
   const onDelete = async () => {
     try {
       setLoading(true);
-      await axios.delete(`/api/event/${params.groupId}`);
+      await axios.delete(`/api/event/${data.uuid}`);
       router.refresh();
       toast.success("Event successfully deleted.");
     } catch (error) {
@@ -63,7 +63,7 @@ export const CellAction: React.FC<CellActionProps> = ({
           <DropdownMenuLabel>
             Actions
           </DropdownMenuLabel>
-          <DropdownMenuItem onClick={onDelete}>
+          <DropdownMenuItem onClick={() => setOpen(true)}>
             <Trash className="mr-2 h-4 w-4"/>
             Delete
           </DropdownMenuItem>

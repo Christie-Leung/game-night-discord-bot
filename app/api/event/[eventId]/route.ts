@@ -4,7 +4,7 @@ import { NextResponse } from "next/server";
 import { createClient } from "@/utils/supabase/client";
 
 export async function DELETE(
-  _req: Request,
+  req: Request,
   { params } : { params: { eventId: string }}
 ) {
   try {
@@ -24,7 +24,7 @@ export async function DELETE(
       console.log('[EVENT_DELETE]', error);
       return new NextResponse("Internal error", { status: 500 })
     }
-    
+
     return NextResponse.json(event);
   } catch (error) {
     console.log('[EVENT_DELETE]', error);

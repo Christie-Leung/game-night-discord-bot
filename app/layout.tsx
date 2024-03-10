@@ -9,8 +9,8 @@ import { ToasterProvider } from '@/providers/toast-provider'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'Game Night',
-  description: 'Add your Game Ideas!',
+  title: 'X-Night',
+  description: 'Get help from your friends in generating ideas for events!',
 }
 
 export default function RootLayout({

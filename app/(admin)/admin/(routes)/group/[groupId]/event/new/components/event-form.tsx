@@ -58,7 +58,7 @@ export const EventForm = ({ groupId }: {
               location: values.location,
           });
           toast.success("Submitted! See you on Game Night!");
-          window.location.replace(`/admin/group/${groupId}/event/${response}`);
+          window.location.replace(`/admin/group/${groupId}/event/${response.data}`);
         } catch (error) {
           toast.error("Something went wrong. Please try submitting again.");
         } finally {

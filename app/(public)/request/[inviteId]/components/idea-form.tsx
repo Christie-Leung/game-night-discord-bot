@@ -25,8 +25,9 @@ const formSchema = z.object({
   description: z.string().min(5),
 });
 
-export const GameForm = ({ inviteId }: {
-  inviteId: string
+export const IdeaForm = ({ inviteId, id }: {
+  inviteId: string,
+  id: string | null,
 }) => {
     const [loading, setLoading] = useState(false);
     const form = useForm<z.infer<typeof formSchema>>({
@@ -38,16 +39,19 @@ export const GameForm = ({ inviteId }: {
       })
       const onSubmit = async (values: z.infer<typeof formSchema>) => {
         setLoading(true);
-        console.log(values)
         try {
           await axios.post('/api/request', {
               name: values.name,
               description: values.description,
               requestGroupId: inviteId,
           });
-          toast.success("Submitted! See you on Game Night!");
-          redirect("/");
+          let success = "Submitted!"
+          if (id) success += " Hope to see you there!"
+          toast.success(success);
+          if (id) window.location.replace(`/event/${id}`);
+          else window.location.replace(`/thankyou`);
         } catch (error) {
+          console.log(error);
           toast.error("Something went wrong. Please try submitting again.");
         } finally {
           setLoading(false);
@@ -56,15 +60,15 @@ export const GameForm = ({ inviteId }: {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="w-80 space-y-8">
+      <form onSubmit={form.handleSubmit(onSubmit)} className="w-full space-y-8">
         <FormField
           control={form.control}
           name="name"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Game Name</FormLabel>
+              <FormLabel>Name</FormLabel>
               <FormControl>
-                <Input placeholder="Some game name..." {...field} />
+                <Input placeholder="Some name..." {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -75,9 +79,9 @@ export const GameForm = ({ inviteId }: {
           name="description"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Description + Instructions</FormLabel>
+              <FormLabel>Description</FormLabel>
               <FormControl>
-                <Textarea placeholder="How does the game work? What are the rules and instructions? You can put a link here too." {...field} />
+                <Textarea placeholder="Maybe describe the thing a bit... even a link would be help :>" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>

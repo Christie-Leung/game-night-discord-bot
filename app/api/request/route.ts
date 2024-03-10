@@ -14,12 +14,15 @@ export async function POST(
     const { name, description, requestGroupId } = body;
 
     if (!name) {
+      console.log('[name]');
       return new NextResponse("Name is required", { status: 400 })
     }
     if (!description) {
+      console.log('[description]');
         return new NextResponse("Description is required", { status: 400 })
     }
     if (!requestGroupId) {
+      console.log('[requestGroupId]');
         return new NextResponse("Request Group Id is required", { status: 400 })
     }
 
@@ -27,9 +30,9 @@ export async function POST(
         name: name,
         description: description,
         requestGroupId: requestGroupId,
-        userId: userId,
+        userId: userId ? userId : null,
     })
-
+    console.log("request", request);
     return NextResponse.json(request);
   } catch (error) {
     console.log('[REQUEST_POST]', error);
