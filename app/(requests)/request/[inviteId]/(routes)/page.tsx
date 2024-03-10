@@ -87,10 +87,6 @@ const GeneratePage = async ({ params }: {
         }
 
     }
-    if (!eventDetails) {
-        redirect('/');
-        return;
-    }
 
     return (
         <div className="w-full h-full flex items-center mt-20 flex-col">
