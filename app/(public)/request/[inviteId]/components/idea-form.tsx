@@ -81,7 +81,7 @@ export const IdeaForm = ({ inviteId, id }: {
             <FormItem>
               <FormLabel>Description</FormLabel>
               <FormControl>
-                <Textarea placeholder="Maybe describe the thing a bit... even a link would be help :>" {...field} />
+                <Textarea placeholder="Maybe describe the thing a bit... even a link would be helpful :>" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
