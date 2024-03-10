@@ -11,6 +11,7 @@ import {
 } from "@/components/ui/alert"
 import { format } from "date-fns";
 import { Separator } from "@/components/ui/separator";
+import { redirect } from 'next/navigation';
 
 const GeneratePage = async ({ params }: {
     params: { inviteId: string }
@@ -34,7 +35,7 @@ const GeneratePage = async ({ params }: {
     }
     if (!details) {
         console.log(rqError);
-        window.location.replace('/');
+        redirect('/');
         return;
     }
 
@@ -72,12 +73,12 @@ const GeneratePage = async ({ params }: {
 
         if (!groupDetails) {
             
-            window.location.replace('/');
+            redirect('/');
             return;
         }
 
     if (!eventDetails) {
-        window.location.replace('/');
+        redirect('/');
         return;
     }
 
