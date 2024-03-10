@@ -8,7 +8,7 @@ export async function POST(
 ) {
   try {
     const supabase = createClient();
-    const body = await req.json();
+    const body = await request.json();
 
     const { name, type } = body;
 
