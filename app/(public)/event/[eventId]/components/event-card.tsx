@@ -20,7 +20,7 @@ const EventCard = ({ eventDetails, userDetails }: {
     userDetails: any
 }) => {
     return (
-    <Card className={"w-96"}>
+    <Card className={"w-auto"}>
         <CardHeader>
             <CardTitle>{eventDetails.name}</CardTitle>
             <CardDescription className={"flex flex-row items-center gap-x-2"}>
@@ -39,7 +39,7 @@ const EventCard = ({ eventDetails, userDetails }: {
                 Meet us on {eventDetails.eventDate} @ {eventDetails.location}
             </p>
             <Button variant="outline" onClick={() => {
-                navigator.clipboard.writeText(`https://x-night-ideas.vercel.app/public/event/${eventDetails}`);
+                navigator.clipboard.writeText(`https://x-night-ideas.vercel.app/event/${eventDetails.id}`);
                 toast.success('Copied link to clipboard');
             }}>
                 <CopyIcon />
@@ -54,7 +54,7 @@ export default EventCard;
 
 /*
             <Button variant="outline" onClick={() => 
-                navigator.clipboard.writeText(`https://x-night-ideas.vercel.app/public/event/${params.eventId}`)
+                navigator.clipboard.writeText(`https://x-night-ideas.vercel.app/event/${params.eventId}`)
             }>
                 <PlusIcon />
                 Add Request

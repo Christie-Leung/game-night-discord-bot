@@ -26,7 +26,7 @@ export const CellAction: React.FC<CellActionProps> = ({
   const [loading, setLoading] = useState(false);
 
   const onCopy = (id: string) => {
-    navigator.clipboard.writeText(`https://x-night-ideas.vercel.app/public/request/${id}`);
+    navigator.clipboard.writeText(`https://x-night-ideas.vercel.app/request/${id}`);
     toast.success("Request ID copied to the clipbaord. Send it to your group!");
   };
 
