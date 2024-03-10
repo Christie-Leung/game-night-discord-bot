@@ -3,19 +3,12 @@
 import { UserButton } from "@clerk/nextjs";
 
 import { Button } from "./ui/button";
-import { redirect, usePathname } from "next/navigation";
 import Link from "next/link";
+import { ThemeToggle } from "./ui/theme-toggle";
 
 const NavBar = ({ userId }: {
   userId: string | null
 }) => {
-
-  const pathname = usePathname();
-  console.log(pathname)
-  const onClick = () => {
-    console.log("clicked");
-    window.location.replace('/sign-in');
-  }
 
   return ( 
     <div className="border-b">
@@ -28,14 +21,17 @@ const NavBar = ({ userId }: {
           >Home
           </Link>
         }
-        { userId ? <div className="ml-auto flex items-center space-x-4">
-          <UserButton afterSignOutUrl="/"/>
-        </div>
-        : 
         <div className="ml-auto flex items-center space-x-4">
-          <Button variant="outline" onClick={onClick}>Log In </Button>
-          <Button onClick={onClick}>Sign Up </Button>
-        </div>}
+        { userId ? 
+          <UserButton afterSignOutUrl="/"/>
+        : 
+        <>
+          <Button variant="outline" onClick={() =>  window.location.replace('/sign-in')}>Log In</Button>
+          <Button onClick={() =>  window.location.replace('/sign-in')}>Sign Up</Button>
+        </>
+        }
+        <ThemeToggle />
+        </div>
       </div>
     </div>
    );

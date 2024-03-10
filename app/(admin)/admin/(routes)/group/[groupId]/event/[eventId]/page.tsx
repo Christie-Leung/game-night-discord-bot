@@ -4,7 +4,7 @@ import { createClient } from "@/utils/supabase/client";
 import toast from "react-hot-toast";
 import { RequestClient } from "../../request/components/client";
 import { RequestGroupColumn } from "../../request/components/column";
-import { format } from "date-fns";
+import { format, parseISO } from "date-fns";
 
 const EventDetailPage = async ({ params }: {
     params: { eventId: string, groupId: string }
@@ -45,7 +45,7 @@ const EventDetailPage = async ({ params }: {
             groupId: item.groupId,
             name: item.name,
             type: item.type,
-            createdAt: format(item.created_at, "MMMM do, yyyy"),
+            createdAt: format(parseISO(item.created_at), "MMMM do, yyyy"),
         }));
     }
 

@@ -1,4 +1,4 @@
-import { format } from "date-fns";
+import { format, parseISO } from "date-fns";
 import { createClient } from "@/utils/supabase/client";
 import { RequestClient } from "./components/client";
 import { RequestGroupColumn } from "./components/column";
@@ -23,7 +23,7 @@ const RequestsPage = async ({ params }: {
       groupId: item.groupId,
       name: item.name,
       type: item.type,
-      createdAt: format(item.created_at, "MMMM do, yyyy"),
+      createdAt: format(parseISO(item.created_at), "MMMM do, yyyy"),
     }));
 }
     console.log(formattedGroups);

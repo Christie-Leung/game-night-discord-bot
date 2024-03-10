@@ -1,7 +1,7 @@
 import { createClient } from "@/utils/supabase/client";
 import toast from "react-hot-toast";
 import { redirect } from 'next/navigation';
-import { format } from "date-fns";
+import { format, parseISO } from "date-fns";
 import { clerkClient } from "@clerk/nextjs";
 import EventCard from "./components/event-card";
 
@@ -22,7 +22,7 @@ const IdeasPage = async ({ params }: {
             id: item.id,
             name: item.name,
             description: item.description,
-            eventDate: format(item.event_date, "MMMM do, yyyy"),
+            eventDate: format(parseISO(item.event_date), "MMMM do, yyyy"),
             location: item.location,
             groupId: item.groupId,
         }))[0]

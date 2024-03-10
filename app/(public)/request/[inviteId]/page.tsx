@@ -9,7 +9,7 @@ import {
   AlertDescription,
   AlertTitle,
 } from "@/components/ui/alert"
-import { format } from "date-fns";
+import { format, parseISO } from "date-fns";
 import { redirect } from 'next/navigation';
 
 const IdeasPage = async ({ params }: {
@@ -22,7 +22,7 @@ const IdeasPage = async ({ params }: {
         .from("RequestGroup")
         .select("*")
         .eq("id", params.inviteId);
-    console.log(rqDetails);
+
     let details = null;
     if (rqDetails) {
         details = rqDetails.map((item) => ({
@@ -32,7 +32,6 @@ const IdeasPage = async ({ params }: {
             eventId: item.eventId,
         }))[0]
     }
-    console.log(details);
     
     if (!details) {
         console.log(rqError);
@@ -72,7 +71,6 @@ const IdeasPage = async ({ params }: {
             toast.error("Error occurred fetching event");
         }
 
-        console.log(groupDetails);
         if (!groupDetails) {
             console.log(groupDetails);
             toast.error("Please ask the host to make sure you have the correct link!");
@@ -92,7 +90,7 @@ const IdeasPage = async ({ params }: {
     }
 
     return (
-        <div className="w-full h-full flex items-center mt-20 flex-col">
+        <div className="w-full grow flex items-center justify-center flex-col">
             <div className="w-auto space-y-4 flex flex-col items-center">
             <Heading 
                 title={"Put in your requests!"}
@@ -104,7 +102,7 @@ const IdeasPage = async ({ params }: {
                         <RocketIcon className="h-4 w-4" />
                         <AlertTitle>Event Reminder!</AlertTitle>
                         <AlertDescription>
-                            {eventDetails.name} is happening on {format(eventDetails.eventDate, "MMMM do, yyyy")} at {eventDetails.location}.
+                            {eventDetails.name} is happening on {format(parseISO(eventDetails.eventDate), "MMMM do, yyyy")} at {eventDetails.location}.
 
                             <br />
                             <br />

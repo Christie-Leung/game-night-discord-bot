@@ -1,4 +1,4 @@
-import { format } from "date-fns";
+import { format, parseISO } from "date-fns";
 import { createClient } from "@/utils/supabase/client";
 import { auth } from "@clerk/nextjs";
 import { GroupColumn } from "./components/columns";
@@ -26,7 +26,7 @@ const GroupsPage = async () => {
     formattedGroups = group.map((item) => ({
       uuid: item.uuid,
       name: item.name,
-      createdAt: format(item.created_at, "MMMM do, yyyy"),
+      createdAt: format(parseISO(item.created_at), "MMMM do, yyyy"),
     }));
 }
 
