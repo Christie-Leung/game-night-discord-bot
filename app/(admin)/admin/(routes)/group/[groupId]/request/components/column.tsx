@@ -18,11 +18,9 @@ export const columns: ColumnDef<RequestGroupColumn>[] = [
     accessorKey: "name",
     header: "Name",
     cell: ({ row }) => 
-    <Button variant="link" onClick={() => {
-
-      console.log(row.original.id);
+    <Button variant="link" onClick={() => 
       window.location.replace(`/request/${row.original.id}`)
-    )}>
+    }>
       {row.original.name}
     </Button>
   },
