@@ -12,9 +12,9 @@ export default async function SetupLayout({
   if (userId) redirect("/admin");
   
   return (
-    <>
+    <div className="flex flex-col h-full">
       <NavBar userId={userId} />
       {children}
-    </>
+    </div>
   )
 }

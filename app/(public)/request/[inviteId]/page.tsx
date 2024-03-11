@@ -91,7 +91,7 @@ const IdeasPage = async ({ params }: {
 
     return (
         <div className="w-full grow flex items-center justify-center flex-col">
-            <div className="w-auto space-y-4 flex flex-col items-center">
+            <div className="w-11/12 max-w-fit space-y-4 flex flex-col items-center">
             <Heading 
                 title={"Put in your requests!"}
                 description={eventDetails ? `Your input is needed for ${eventDetails.name}` : groupDetails ? `Your input is needed for ${groupDetails.name} to continue hosting great events!` : "" }

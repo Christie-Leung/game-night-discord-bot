@@ -33,3 +33,26 @@ export async function POST(
     return new NextResponse("Internal error", { status: 500 })
   }
 }
+
+export async function GET(
+  request: Request,
+  { params } : { params: { groupId: string }}
+) {
+  try {
+    const supabase = createClient();
+
+    const { data, error } = await supabase.from('RequestGroup')
+      .select("*")
+      .eq("id", params.groupId);
+
+    if (error) {
+      console.log('[REQUESTGROUP_GROUPID_GET]', error);
+    return new NextResponse("Internal error", { status: 500 });
+    }
+
+    return NextResponse.json(data);
+  } catch (error) {
+    console.log('[REQUESTGROUP_GROUPID_GET]', error);
+    return new NextResponse("Internal error", { status: 500 })
+  }
+}

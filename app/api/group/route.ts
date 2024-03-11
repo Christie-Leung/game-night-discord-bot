@@ -27,13 +27,34 @@ export async function POST(
     }).select("uuid");
 
     if (error) {
-      console.log('[GROUP_POST]', error);
+      console.log('[GROUPS_POST]', error);
       return new NextResponse("Internal error", { status: 500 })
     }
     
     return NextResponse.json(group[0]?.uuid);
   } catch (error) {
-    console.log('[GROUP_POST]', error);
+    console.log('[GROUPS_POST]', error);
+    return new NextResponse("Internal error", { status: 500 })
+  }
+}
+
+export async function GET(
+  req: Request,
+) {
+  try {
+    const supabase = createClient();
+
+
+    const {data: group, error} = await supabase.from('Group')
+      .select("*");
+    if (error) {
+      console.log('[GROUPS_POST]', error);
+      return new NextResponse("Internal error", { status: 500 })
+    }
+    
+    return NextResponse.json(group);
+  } catch (error) {
+    console.log('[GROUPS_POST]', error);
     return new NextResponse("Internal error", { status: 500 })
   }
 }

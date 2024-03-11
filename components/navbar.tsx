@@ -22,6 +22,7 @@ const NavBar = ({ userId }: {
           </Link>
         }
         <div className="ml-auto flex items-center space-x-4">
+          <Button variant="secondary" onClick={() => window.location.replace('/api')}>API</Button>
         { userId ? 
           <UserButton afterSignOutUrl="/"/>
         : 

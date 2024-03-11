@@ -1,4 +1,3 @@
-import { auth } from "@clerk/nextjs";
 import { NextResponse } from "next/server";
 
 import { createClient } from "@/utils/supabase/client";
@@ -8,14 +7,9 @@ export async function POST(
 ) {
   try {
     const supabase = createClient();
-    const { userId } = auth();
     const body = await req.json();
 
     const { name, description, groupId, eventDate, location } = body;
-
-    if (!userId) {
-      return new NextResponse("Unauthorized", { status: 401 })
-    }
 
     if (!name) {
       return new NextResponse("Name is required", { status: 400 })
@@ -30,12 +24,31 @@ export async function POST(
     }).select("uuid");
 
     if (error) {
-      console.log('[EVENT_POST]', error);
+      console.log('[EVENTS_POST]', error);
       return new NextResponse("Internal error", { status: 500 })
     }
     return NextResponse.json(event[0].uuid);
   } catch (error) {
-    console.log('[EVENT_POST]', error);
+    console.log('[EVENTS_POST]', error);
+    return new NextResponse("Internal error", { status: 500 })
+  }
+}
+
+export async function GET(
+  req: Request,
+) {
+  try {
+    const supabase = createClient();
+
+    const {data: event, error} = await supabase.from('Event').select("*");
+
+    if (error) {
+      console.log('[EVENTS_GET]', error);
+      return new NextResponse("Internal error", { status: 500 })
+    }
+    return NextResponse.json(event);
+  } catch (error) {
+    console.log('[EVENTS_GET]', error);
     return new NextResponse("Internal error", { status: 500 })
   }
 }

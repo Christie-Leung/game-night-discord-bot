@@ -39,3 +39,17 @@ export async function POST(
     return new NextResponse("Internal error", { status: 500 })
   }
 }
+
+export async function GET(
+  req: Request,
+) {
+  try {
+    const supabase = createClient();
+
+    const { data, error } = await supabase.from('Request').select('*');
+    return NextResponse.json(data);
+  } catch (error) {
+    console.log('[REQUESTS_GET]', error);
+    return new NextResponse("Internal error", { status: 500 })
+  }
+}
