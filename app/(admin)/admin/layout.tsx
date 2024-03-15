@@ -15,9 +15,9 @@ export default async function AdminLayout({
   }
 
   return (
-    <>
+    <div className="flex flex-col h-full">
       <NavBar userId={userId} />
       {children}
-    </>
+    </div>
   )
 }

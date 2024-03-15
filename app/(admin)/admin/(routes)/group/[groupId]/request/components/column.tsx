@@ -20,7 +20,7 @@ export const columns: ColumnDef<RequestGroupColumn>[] = [
     cell: ({ row }) => 
     <Button variant="link" onClick={() => {
       console.log(row.original.id);
-      window.location.replace(`/request/${row.original.id}`)
+      window.location.replace(`/admin/request-group/${row.original.id}`)
     }}>
       {row.original.name}
     </Button>

@@ -13,14 +13,14 @@ const NavBar = ({ userId }: {
   return ( 
     <div className="border-b">
       <div className="flex h-16 items-center px-4">
-        {userId && 
-          <Link
-            key="/admin"
-            href="/admin"
-            className="mx-6 text-sm font-medium transition-colors hover:text-primary hover:underline"
-          >Home
-          </Link>
-        }
+        <Link
+          key={userId ? "/admin" : "/"}
+          href={userId ? "/admin" : "/"}
+          className="mx-6 text-sm font-medium transition-colors hover:text-primary hover:underline"
+        >
+          Home
+        </Link>
+        
         <div className="ml-auto flex items-center space-x-4">
           <Button variant="secondary" onClick={() => window.location.replace('/api')}>API</Button>
         { userId ? 

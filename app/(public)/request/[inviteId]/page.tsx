@@ -85,6 +85,17 @@ const IdeasPage = async ({ params }: {
                 eventDate: item.event_date,
                 location: item.location,
             }))[0]
+
+            if (Date.now() > Date.parse(eventDetails?.eventDate)) {
+                return (
+                    <div className="w-full grow flex flex-col items-center justify-center">
+                        <Heading 
+                            title={"You missed your chance to submit a request ;-;"}
+                            description={"Maybe next time!"} 
+                        />
+                    </div>
+                )
+            }
         }
 
     }
