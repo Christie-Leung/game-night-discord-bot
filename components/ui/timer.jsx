@@ -19,10 +19,10 @@ const Timer = ({ expiryTimestamp }) => {
   const params = useParams();
 
   return (
-    <div className='flex flex-col w-full items-center'>
-    <div style={{textAlign: 'center'}}>      
-      <div style={{fontSize: '100px'}}>
-        <span>{String(days).padStart(2, "0")}</span>:
+    <div className='flex flex-col w-full items-center px-4'>
+    <div className="text-center">      
+      <div className="text-6xl">
+        <span className="text-9xl">{String(days).padStart(2, "0")}</span>:
         <span>{String(hours).padStart(2, "0")}</span>:
         <span>{String(minutes).padStart(2, "0")}</span>:
         <span>{String(seconds).padStart(2, "0")}</span>

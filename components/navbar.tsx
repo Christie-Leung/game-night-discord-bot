@@ -7,7 +7,7 @@ import Link from "next/link";
 import { ThemeToggle } from "./ui/theme-toggle";
 
 const NavBar = ({ userId }: {
-  userId: string | null
+  userId?: string | null
 }) => {
 
   return ( 
